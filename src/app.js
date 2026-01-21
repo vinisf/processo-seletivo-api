@@ -1,33 +1,25 @@
 const express = require("express");
 const cors = require("cors");
 
-app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://processo-seletivo-web.vercel.app" 
-  ],
-  credentials: true
-}));
-
-
 const authRoutes = require("./routes/auth.routes");
-
-const app = express();
 const processRoutes = require("./routes/process.routes");
 const applicationRoutes = require("./routes/application.routes");
+const dashboardRoutes = require("./routes/dashboard.routes");
 
-app.use("/processes", processRoutes);
-app.use("/applications", applicationRoutes);
+const app = express();
 
-const dashboardRoutes = require("./routes/dashboard.routes.js");
-
-app.use("/dashboard", dashboardRoutes);
-
-
-
-app.use(cors());
+/**
+ * 🔥 MIDDLEWARES PRIMEIRO
+ */
+app.use(cors());              // ✅ CORS PRIMEIRO
 app.use(express.json());
 
+/**
+ * 🔥 ROTAS DEPOIS
+ */
 app.use("/auth", authRoutes);
+app.use("/processes", processRoutes);
+app.use("/applications", applicationRoutes);
+app.use("/dashboard", dashboardRoutes);
 
 module.exports = app;
