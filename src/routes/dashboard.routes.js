@@ -1,9 +1,9 @@
-import { Router } from "express";
-import { authMiddleware } from "../middlewares/auth.middleware.js";
-import { getDashboardSummary } from "../controllers/dashboard.controller.js";
+const express = require("express");
+const { getDashboardSummary } = require("../controllers/dashboard.controller");
+const { ensureAuth, ensureAdmin } = require("../middlewares/auth.middleware");
 
-const router = Router();
+const router = express.Router();
 
-router.get("/summary", authMiddleware, getDashboardSummary);
+router.get("/summary", ensureAuth, ensureAdmin, getDashboardSummary);
 
-export default router;
+module.exports = router;

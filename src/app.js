@@ -10,7 +10,7 @@ const applicationRoutes = require("./routes/application.routes");
 app.use("/processes", processRoutes);
 app.use("/applications", applicationRoutes);
 
-import dashboardRoutes from "./routes/dashboard.routes.js";
+const dashboardRoutes = require("./routes/dashboard.routes.js");
 
 app.use("/dashboard", dashboardRoutes);
 
