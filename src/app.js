@@ -1,6 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://processo-seletivo-web.vercel.app" 
+  ],
+  credentials: true
+}));
+
+
 const authRoutes = require("./routes/auth.routes");
 
 const app = express();
