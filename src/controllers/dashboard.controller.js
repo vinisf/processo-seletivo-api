@@ -5,23 +5,11 @@ async function getDashboardSummary(req, res) {
   try {
     const total = await prisma.application.count();
 
-    const aprovados = await prisma.application.count({
-      where: { status: "APPROVED" },
-    });
-
-    const pendentes = await prisma.application.count({
-      where: { status: "PENDING" },
-    });
-
-    const reprovados = await prisma.application.count({
-      where: { status: "REJECTED" },
-    });
-
     res.json({
       total,
-      aprovados,
-      pendentes,
-      reprovados,
+      aprovados: 0,
+      pendentes: 0,
+      reprovados: 0,
     });
   } catch (error) {
     console.error("DASHBOARD ERROR:", error);
@@ -31,5 +19,6 @@ async function getDashboardSummary(req, res) {
     });
   }
 }
+
 
 module.exports = { getDashboardSummary };
