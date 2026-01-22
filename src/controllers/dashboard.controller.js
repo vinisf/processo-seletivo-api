@@ -6,15 +6,15 @@ async function getDashboardSummary(req, res) {
     const total = await prisma.application.count();
 
     const aprovados = await prisma.application.count({
-      where: { status: "APROVADO" },
+      where: { status: "APPROVED" },
     });
 
     const pendentes = await prisma.application.count({
-      where: { status: "PENDENTE" },
+      where: { status: "PENDING" },
     });
 
     const reprovados = await prisma.application.count({
-      where: { status: "REPROVADO" },
+      where: { status: "REJECTED" },
     });
 
     res.json({
@@ -24,9 +24,10 @@ async function getDashboardSummary(req, res) {
       reprovados,
     });
   } catch (error) {
-    console.error(error);
+    console.error("DASHBOARD ERROR:", error);
     res.status(500).json({
       message: "Erro ao carregar dados do dashboard",
+      error: error.message,
     });
   }
 }

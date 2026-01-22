@@ -9,13 +9,15 @@ const dashboardRoutes = require("./routes/dashboard.routes");
 const app = express();
 
 /**
- * 🔥 MIDDLEWARES PRIMEIRO
+ * 🔥 MIDDLEWARES 
  */
-app.use(cors());              // ✅ CORS PRIMEIRO
+
+// ✅ CORS
+app.use(cors());             
 app.use(express.json());
 
 /**
- * 🔥 ROTAS DEPOIS
+ * 🔥 ROTAS
  */
 app.use("/auth", authRoutes);
 app.use("/processes", processRoutes);
